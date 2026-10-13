@@ -1,0 +1,417 @@
+/* =====================================================
+   BARBEARIA SANTANA - ESTILOS (Mobile First)
+   Para mudar as cores do site inteiro, edite as variáveis abaixo.
+   ===================================================== */
+
+:root {
+  --carvao: #15120f;      /* fundo da página */
+  --grafite: #211c18;     /* fundo dos blocos */
+  --grafite-2: #2b251f;   /* campos e cards */
+  --linha: #3a322a;       /* bordas discretas */
+  --couro: #7a4a2a;       /* marrom couro */
+  --ouro: #c9a24b;        /* dourado principal */
+  --ouro-claro: #e0bf6e;  /* dourado em hover */
+  --osso: #efe6d4;        /* texto principal */
+  --cinza: #a39a8e;       /* texto secundário */
+  --erro: #ff8f7a;
+
+  --fonte-titulo: "Alfa Slab One", Georgia, "Times New Roman", serif;
+  --fonte-texto: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --raio: 10px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--carvao);
+  color: var(--osso);
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  line-height: 1.5;
+  color-scheme: dark;
+}
+
+h1, h2, p, dl, dd { margin: 0; }
+
+/* ================= CABEÇALHO ================= */
+.capa {
+  background:
+    radial-gradient(120% 90% at 50% 0%, #2d231a 0%, var(--carvao) 70%);
+}
+
+.capa__conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2.5rem 1.25rem 2rem;
+}
+
+.capa__icone {
+  width: 72px;
+  height: 72px;
+  color: var(--ouro);
+}
+
+.marca {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 9vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--osso);
+}
+
+.slogan {
+  color: var(--cinza);
+  font-size: 1.05rem;
+}
+
+/* Faixa de poste de barbeiro: o único movimento da página */
+.poste {
+  height: 16px;
+  background-color: var(--couro);
+  background-image: linear-gradient(
+    45deg,
+    var(--ouro) 25%, transparent 25%,
+    transparent 50%, var(--ouro) 50%,
+    var(--ouro) 75%, transparent 75%,
+    transparent
+  );
+  background-size: 32px 32px;
+  animation: poste 2.4s linear infinite;
+}
+
+@keyframes poste {
+  from { background-position: 32px 0; }
+  to   { background-position: 0 0; }
+}
+
+/* ================= LAYOUT ================= */
+.layout {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.bloco {
+  background: var(--grafite);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 1.25rem 1rem;
+}
+
+.bloco h2,
+.resumo h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.passo {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: var(--ouro);
+  color: var(--carvao);
+  font-family: var(--fonte-texto);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.bloco__apoio {
+  margin-top: 0.35rem;
+  color: var(--cinza);
+  font-size: 0.95rem;
+}
+
+/* ================= SERVIÇOS ================= */
+.servicos {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.servico {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+/* O checkbox real fica escondido, mas continua acessível pelo teclado */
+.servico input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.servico__corpo {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 0.85rem;
+  row-gap: 0.1rem;
+  min-height: 64px;
+  padding: 0.85rem 1rem;
+  background: var(--grafite-2);
+  border: 1.5px solid var(--linha);
+  border-radius: var(--raio);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.servico__marca {
+  grid-row: 1 / span 2;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--cinza);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.servico__marca::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.75rem;
+  border: solid var(--carvao);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+  opacity: 0;
+}
+
+.servico__nome {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.servico__dica {
+  grid-column: 2;
+  color: var(--ouro);
+  font-size: 0.85rem;
+}
+
+.servico__preco {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  font-weight: 700;
+  color: var(--ouro);
+  white-space: nowrap;
+}
+
+.servico:hover .servico__corpo { border-color: var(--couro); }
+
+.servico input:checked + .servico__corpo {
+  border-color: var(--ouro);
+  background: #332a1f;
+}
+
+.servico input:checked + .servico__corpo .servico__marca {
+  background: var(--ouro);
+  border-color: var(--ouro);
+}
+
+.servico input:checked + .servico__corpo .servico__marca::after { opacity: 1; }
+
+.servico input:focus-visible + .servico__corpo {
+  outline: 3px solid var(--ouro-claro);
+  outline-offset: 2px;
+}
+
+.aviso {
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border-left: 3px solid var(--couro);
+  background: var(--grafite-2);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  color: var(--osso);
+  font-size: 0.92rem;
+}
+
+/* ================= CAMPOS ================= */
+.campos-linha {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.campo { margin-top: 1rem; }
+.campos-linha .campo { margin-top: 0; }
+.bloco h2 + .campo { margin-top: 1rem; }
+
+.campo label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.7rem 0.9rem;
+  background: var(--grafite-2);
+  color: var(--osso);
+  border: 1.5px solid var(--linha);
+  border-radius: var(--raio);
+  font: inherit;
+  font-size: 1rem; /* 16px evita o zoom automático no iPhone */
+}
+
+.campo input::placeholder { color: #7d746a; }
+
+.campo input:focus-visible,
+.campo select:focus-visible {
+  outline: 3px solid var(--ouro-claro);
+  outline-offset: 1px;
+  border-color: var(--ouro);
+}
+
+.campo select:disabled { opacity: 0.6; }
+
+.campo [aria-invalid="true"] { border-color: var(--erro); }
+
+.erro {
+  min-height: 0;
+  margin-top: 0.4rem;
+  color: var(--erro);
+  font-size: 0.92rem;
+}
+
+.erro:empty { display: none; }
+
+/* ================= RESUMO ================= */
+.resumo {
+  background: var(--grafite);
+  border: 1.5px solid var(--couro);
+  border-radius: var(--raio);
+  padding: 1.25rem 1rem;
+}
+
+.resumo__lista {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.resumo__lista div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--linha);
+}
+
+.resumo__lista dt { color: var(--cinza); }
+.resumo__lista dd { text-align: right; font-weight: 600; }
+
+.resumo__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 1rem 0;
+}
+
+.resumo__total span { color: var(--cinza); }
+
+.resumo__total strong {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--ouro);
+}
+
+.btn {
+  width: 100%;
+  min-height: 58px;
+  padding: 0.8rem 1rem;
+  background: var(--ouro);
+  color: var(--carvao);
+  border: 0;
+  border-radius: var(--raio);
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.btn:hover { background: var(--ouro-claro); }
+.btn:active { transform: scale(0.98); }
+
+.btn:focus-visible {
+  outline: 3px solid var(--osso);
+  outline-offset: 3px;
+}
+
+.resumo__nota {
+  margin-top: 0.8rem;
+  color: var(--cinza);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* ================= RODAPÉ ================= */
+.rodape {
+  padding: 1.5rem 1rem 2.5rem;
+  border-top: 1px solid var(--linha);
+  text-align: center;
+  color: var(--cinza);
+  font-size: 0.92rem;
+}
+
+/* ================= TELAS MAIORES ================= */
+@media (min-width: 600px) {
+  .campos-linha { grid-template-columns: 1fr 1fr; }
+  .bloco, .resumo { padding: 1.5rem; }
+}
+
+@media (min-width: 900px) {
+  .capa__conteudo { padding: 3.5rem 1.5rem 2.5rem; }
+  .capa__icone { width: 88px; height: 88px; }
+
+  .layout {
+    grid-template-columns: 1fr 360px;
+    align-items: start;
+    gap: 1.5rem;
+    padding-top: 2rem;
+  }
+
+  /* O resumo acompanha a rolagem no computador */
+  .resumo {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .poste { animation: none; }
+  * { transition: none !important; }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14110f">
+  <meta name="description" content="Agende seu horário na Barbearia Santana em poucos toques e confirme pelo WhatsApp.">
+  <title>Barbearia Santana | Agende seu horário</title>
+
+  <!-- Fontes (Google Fonts). Se estiver sem internet, o navegador usa as fontes reserva definidas no CSS. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= CABEÇALHO ================= -->
+  <header class="capa">
+    <div class="capa__conteudo">
+      <!-- Ícone de tesoura (SVG embutido, não precisa de imagem externa) -->
+      <svg class="capa__icone" viewBox="0 0 64 64" role="img" aria-label="Ícone de tesoura de barbeiro">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="21" cy="46" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle cx="43" cy="46" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/>
+        <path d="M25.5 41 L41 14 M38.5 41 L23 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Para mudar o nome da barbearia, edite aqui e também a tag <title> acima -->
+      <h1 class="marca">Barbearia Santana</h1>
+      <p class="slogan">Corte na régua, papo de bairro.</p>
+    </div>
+
+    <!-- Faixa inspirada no poste de barbeiro -->
+    <div class="poste" aria-hidden="true"></div>
+  </header>
+
+  <!-- ================= CONTEÚDO ================= -->
+  <main class="layout">
+
+    <form id="form-agendamento" class="form" novalidate>
+
+      <!-- 1. SERVIÇOS (os cards são criados pelo script.js a partir da lista SERVICOS) -->
+      <section class="bloco" aria-labelledby="t-servicos">
+        <h2 id="t-servicos"><span class="passo">1</span>Escolha os serviços</h2>
+        <p class="bloco__apoio">Você pode marcar mais de um.</p>
+
+        <div id="lista-servicos" class="servicos">
+          <noscript><p class="erro">Ative o JavaScript do navegador para agendar.</p></noscript>
+        </div>
+
+        <p id="aviso-combo" class="aviso" hidden>
+          O Combo já inclui corte e barba. Se marcou os dois também, confira o valor total.
+        </p>
+        <p id="erro-servicos" class="erro" role="alert"></p>
+      </section>
+
+      <!-- 2. DATA E HORÁRIO -->
+      <section class="bloco" aria-labelledby="t-data">
+        <h2 id="t-data"><span class="passo">2</span>Dia e horário</h2>
+
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" required>
+            <p id="erro-data" class="erro" role="alert"></p>
+          </div>
+
+          <div class="campo">
+            <label for="horario">Horário</label>
+            <select id="horario" name="horario" required disabled>
+              <option value="">Escolha a data primeiro</option>
+            </select>
+            <p id="erro-horario" class="erro" role="alert"></p>
+          </div>
+        </div>
+        <p class="bloco__apoio">Atendemos de segunda a sábado. Domingo fechado.</p>
+      </section>
+
+      <!-- 3. IDENTIFICAÇÃO -->
+      <section class="bloco" aria-labelledby="t-nome">
+        <h2 id="t-nome"><span class="passo">3</span>Quem vai ser atendido?</h2>
+
+        <div class="campo">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Ex.: João da Silva" maxlength="80" required>
+          <p id="erro-nome" class="erro" role="alert"></p>
+        </div>
+      </section>
+    </form>
+
+    <!-- ================= RESUMO ================= -->
+    <aside class="resumo" aria-labelledby="t-resumo">
+      <h2 id="t-resumo">Seu agendamento</h2>
+
+      <dl class="resumo__lista">
+        <div>
+          <dt>Serviços</dt>
+          <dd id="resumo-servicos">Nenhum selecionado</dd>
+        </div>
+        <div>
+          <dt>Data</dt>
+          <dd id="resumo-data">—</dd>
+        </div>
+        <div>
+          <dt>Horário</dt>
+          <dd id="resumo-horario">—</dd>
+        </div>
+      </dl>
+
+      <p class="resumo__total">
+        <span>Valor total</span>
+        <strong id="total" aria-live="polite">R$ 0,00</strong>
+      </p>
+
+      <!-- O botão fica fora da <form> no HTML, mas o atributo form="..." o liga ao formulário -->
+      <button type="submit" form="form-agendamento" id="btn-enviar" class="btn">
+        Confirmar e Enviar pelo WhatsApp
+      </button>
+      <p class="resumo__nota">Você será levado ao WhatsApp com a mensagem pronta. A barbearia confirma o horário por lá.</p>
+    </aside>
+
+  </main>
+
+  <!-- ================= RODAPÉ ================= -->
+  <footer class="rodape">
+    <p>Segunda a sábado, das 09h às 19h, com pausa das 12h às 14h.</p>
+    <p>Domingo fechado.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
